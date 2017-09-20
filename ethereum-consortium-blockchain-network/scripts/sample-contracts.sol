@@ -7,8 +7,7 @@ contract StateHolder {
     string public myString;
 
     modifier onlyOwner {
-        if (msg.sender != owner)
-            throw;
+        require (msg.sender == owner);
         _;
     }
 
@@ -37,9 +36,7 @@ contract Token {
     }
 
     function transfer(address _to, uint _amount) {
-        if (balances[msg.sender] < _amount) {
-            throw;
-        }
+        require (balances[msg.sender] >= _amount);
 
         balances[msg.sender] -= _amount;
         balances[_to] += _amount;
