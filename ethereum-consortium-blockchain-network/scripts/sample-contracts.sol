@@ -8,7 +8,7 @@ contract StateHolder {
 
     modifier onlyOwner {
         if (msg.sender != owner)
-            throw;
+            revert();
         _;
     }
 
@@ -38,7 +38,7 @@ contract Token {
 
     function transfer(address _to, uint _amount) {
         if (balances[msg.sender] < _amount) {
-            throw;
+            revert();
         }
 
         balances[msg.sender] -= _amount;
